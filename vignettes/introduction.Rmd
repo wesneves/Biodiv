@@ -1,0 +1,82 @@
+---
+title: "introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+## import packages
+library(ggplot2)
+## Library Package
+library(Biodiv)
+```
+
+In this document, here provide a quick introduction demonstrating how to run the package `Biodiv` (Taxonomic Diversity, Functional Diversity and Functional Redundance). `Biodiv` has several main functions: `FDsingle`, `FDchao`, `Div` and `PlotDiv`.
+
+The `Biodiv` is the extension of function [FunD] (https://github.com/AnneChao/FunD.git) (Chao et al , 2019) `Biodiv` focuses on three measures of Hill numbers of order q: species richness (`q = 0`), Shannon diversity (`q = 1`, the exponential of Shannon entropy) and Simpson diversity (`q = 2`, the inverse of Simpson concentration) and extend Hill numbers to three dimensions: taxonomic diversity (TD), functional diversity (FD) and functional redundance (FR) under Hill-Chao family frame work (Chao et al., 2019) and And the functional redundancy was based on a methodological modification of the work by (Ricotta et al 2016), in which functional redundancy was calculated as the relative difference between the Rao's Q index ratio and the Simpson index. The result is expressed within the interval [0, 1]. However, since these analyses do not strictly adhere to several desirable mathematical properties as described in (Jost 2009), several authors (Chao et al, 2014, 2019; Jost, 2006; Leinster & Cobbold, 2012) demonstrated that these inconveniences are overcome by converting the raw entropy values into what is known as effective species. Yet, these analyses solely focus on the concept of taxonomic diversity. Therefore, authors (Leinster & Cobbold, 2012 and Chao et al 2019) suggested that Hill numbers should take into account all equivalent forms of species diversity indices from the perspectives of functional and phylogenetic diversity as well. Both authors developed formulas known as generalized Hill numbers (Chao et al, 2019, Leinster & Cobbold, 2012). For instance, Leinster and Cobbold relate various dissimilarity-based indices to one another, based on the weight they assign to common functional groups. Chao and collaborators, on the other hand, not only considers dissimilarities between pairs of species but also weighs these values against a threshold of pairwise species distinction (Tau), thereby making the analysis more meaningful in representing the community from a functional perspective. Since in Chao's work the authors argue that the results of the methodology proposed by Leinster & Cobbold will always lead to underestimated measurements of biological diversity.
+
+The function `FDchao` calculate Functional Diversity of N sites for various values of tau and q.
+The function `Div` calculate Functional Redundance blending the approach from the work of Ricotta et al 2016 with that of Chao et al 2019, the functional redundancy obtained through this new approach is essentially the relative difference between the ratio of functional diversity weighted by the mean value of Tau and the biological diversity weighted by the minimum value of tau (corresponding to classic taxonomic diversity, which can be derived using conventional Hill numbers). The result is saved in a data.frame object necessary for plotting graphs of taxonomic, functional, and redundancy diversity.
+
+## SOFTWARE NEEDED TO RUN Biodiv IN R
+- Required: [R](https://cran.r-project.org/)
+- Suggested: [RStudio IDE](https://www.rstudio.com/products/RStudio/#Desktop)
+
+## HOW TO RUN Biodiv:
+```{r eval=FALSE}
+## install Biodiv package from CRAN
+# install.packages("Biodiv")  # coming soon
+
+## install the latest version from github
+install.packages('devtools')
+library(devtools)
+install_github('wesneves/Biodiv')
+
+## import packages
+library(ggplot2)
+```
+
+## MAIN FUNCTION: FDchao()
+First describe the main function `iNEXT3D()` with default arguments: 
+
+```{r eval=FALSE}
+FDchao <- function(data, distance, tau, q, boot)
+```
+
+The arguments of this function are briefly described below, and will be explained in more details by illustrative examples in later text. This main function computes diversity estimates of order q, and weighted by Tau value.
+
+## DATA FORMAT
+Individual-based abundance data: Input data for each assemblage/site include samples species abundances in an empirical sample of n individuals (“reference sample”). When there are N assemblages, input data consist of an S by N abundance matrix, or N lists of species abundances.  
+
+
+
+
+
+
+## References
+- Chao, A., Chiu, C.-H., & Jost, L. (2014). Unifying species diversity, phylogenetic diversity, functional diversity, and related similarity and differentiation measures through Hill numbers. Annual Review of Ecology, Evolution, and Systematics, 45, 297–324. 
+
+- Chao, A., Chiu, C.-H., Villéger, S., Sun, I.-F., Thorn, S., Lin, Y.-C., Chiang, J. M. and Sherwin, W. B. (2019). An attribute-diversity approach to functional diversity, functional beta diversity, and related (dis)similarity measures. Ecological Monographs, 89, e01343. 10.1002/ecm.1343.
+
+- Jost, L. (2006). Entropy and diversity. Oikos, 113(2), 363–375. 
+
+- Jost, L. (2009). Mismeasuring biological diversity: Response to Hoffmann and Hoffmann (2008). Ecological Economics, 68, 925–928. 
+
+- Leinster, T., & Cobbold, C. A. (2012). Measuring diversity: The importance of species similarity. Ecology, 93(3), 477–489. 
+- Ricotta, C., de Bello, F., Moretti, M., Caccianiga, M., Cerabolini, B. E. L., & Pavoine, S. (2016). Measuring the functional redundancy of biological communities: A quantitative guide. Methods in Ecology and Evolution, 7, 1386–1395. 
+
+
+
+
+
+
