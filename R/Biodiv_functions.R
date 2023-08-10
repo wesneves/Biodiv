@@ -24,7 +24,7 @@ FDsingle <- function(data, distance, tau, q){
   }
 }
 
-#' FDchao(data, distance, tau, q, boot, datatype) Functional Diversity of N sites for various values of tau and q
+#' FDchao(data, distance, tau, q, boot) Functional Diversity of N sites for various values of tau and q
 #'
 #' This function calculate Functional Diversity of N sites
 #' for various values of tau and q

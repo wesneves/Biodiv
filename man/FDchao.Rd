@@ -2,7 +2,7 @@
 % Please edit documentation in R/Biodiv_functions.R
 \name{FDchao}
 \alias{FDchao}
-\title{FDchao(data, distance, tau, q, boot, datatype) Functional Diversity of N sites for various values of tau and q}
+\title{FDchao(data, distance, tau, q, boot) Functional Diversity of N sites for various values of tau and q}
 \usage{
 FDchao(data, distance, tau, q, boot)
 }

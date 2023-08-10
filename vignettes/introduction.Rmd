@@ -73,6 +73,7 @@ Individual-based abundance data: Input data for each assemblage/site include sam
 - Jost, L. (2009). Mismeasuring biological diversity: Response to Hoffmann and Hoffmann (2008). Ecological Economics, 68, 925–928. 
 
 - Leinster, T., & Cobbold, C. A. (2012). Measuring diversity: The importance of species similarity. Ecology, 93(3), 477–489. 
+
 - Ricotta, C., de Bello, F., Moretti, M., Caccianiga, M., Cerabolini, B. E. L., & Pavoine, S. (2016). Measuring the functional redundancy of biological communities: A quantitative guide. Methods in Ecology and Evolution, 7, 1386–1395. 
 
 
