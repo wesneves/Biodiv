@@ -190,17 +190,17 @@ plotDiv <- function(data, tog = TRUE,  cap = FALSE){
     ggtitle("Perfil q (Redundância Funcional)")
 
   if (cap) {
-    tax_title <- readline("Digite o título para o gráfico de Diversidade Taxonômica: ")
-    tax_x_label <- readline("Digite a etiqueta para o eixo x do gráfico de Diversidade Taxonômica: ")
-    tax_y_label <- readline("Digite a etiqueta para o eixo y do gráfico de Diversidade Taxonômica: ")
+    tax_title <- readline("Enter the title for the Taxonomic Diversity plot: ")
+    tax_x_label <- readline("Enter the label for the x-axis of the Taxonomic Diversity plot: ")
+    tax_y_label <- readline("Enter the label for the y-axis of the Taxonomic Diversity plot: ")
 
-    fun_title <- readline("Digite o título para o gráfico de Diversidade Funcional: ")
-    fun_x_label <- readline("Digite a etiqueta para o eixo x do gráfico de Diversidade Funcional: ")
-    fun_y_label <- readline("Digite a etiqueta para o eixo y do gráfico de Diversidade Funcional: ")
+    fun_title <- readline("Enter the title for the Functional Diversity graph: ")
+    fun_x_label <- readline("Enter the label for the x-axis of the Functional Diversity plot: ")
+    fun_y_label <- readline("Enter the label for the y-axis of the Functional Diversity plot: ")
 
-    red_title <- readline("Digite o título para o gráfico de Redundância Funcional: ")
-    red_x_label <- readline("Digite a etiqueta para o eixo x do gráfico de Redundância Funcional: ")
-    red_y_label <- readline("Digite a etiqueta para o eixo y do gráfico de Redundância Funcional: ")
+    red_title <- readline("Enter the title for the Functional Redundancy plot: ")
+    red_x_label <- readline("Enter the label for the x-axis of the Functional Redundancy plot: ")
+    red_y_label <- readline("Enter the label for the y-axis of the Functional Redundancy plot: ")
 
     # Alterar títulos, etiquetas de eixos x e y dos gráficos
     plotTax <- plotTax + ggtitle(tax_title) + labs(x = tax_x_label, y = tax_y_label)
@@ -210,7 +210,7 @@ plotDiv <- function(data, tog = TRUE,  cap = FALSE){
   if (tog) {
     return(ggpubr::ggarrange(plotTax, plotFun, plotRedFun, ncol = 3, nrow = 1))
   } else {
-    choice <- menu(c("Plot Diversidade Taxonômica", "Plot Diversidade Funcional", "Plot Redundância Funcional"), title = "Escolha um gráfico:")
+    choice <- menu(c("Taxonomic Diversity Plot", "Functional Diversity Plot", "Functional Redundancy Plot"), title = "Choose a Graphic:")
 
     if (choice == 1) {
       return(plotTax)
@@ -219,7 +219,7 @@ plotDiv <- function(data, tog = TRUE,  cap = FALSE){
     } else if (choice == 3) {
       return(plotRedFun)
     } else {
-      stop("Escolha inválida.")
+      stop("Invalid Choice.")
     }
   }
 }
