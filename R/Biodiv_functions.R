@@ -154,15 +154,17 @@ Div <- function(data) {
   return(data_plot)
 }
 
-#' PlotDiv(data) function to plot the value of diversity
+#' plotDiv(data, tog, cap) function to plot the value of diversity
 #'
 #' This is a function to plot the results of the FDchao function
 #' filtered by the Div function, generating three graphs:
 #' Taxonomic Diversity, Functional Diversity, and Functional Redundancy.
 #' @param data This parameter must necessarily be an object containing the outcome of the Div function to prepare the graph.
+#' @param tog This parameter is an abbreviation of the word "together" and is a logical object. If it is set to TRUE, the function will plot the three graphs together (side by side).
+#' @param cap This parameter is an abbreviation of the word "captions" and is a logical object. If it is set to TRUE, the function will ask you to set the labels for the graph.
 #' @return Three graphs, namely (functional diversity, taxonomic diversity, and functional redundancy).
 #' @export
-PlotDiv <- function(data){
+plotDiv <- function(data, tog = TRUE,  cap = FALSE){
   plotTax <- ggplot(data)+
     geom_line(aes(x=qEix, y = TauMin, color = Color, linetype = Color), linewidth = 1.2)+
     scale_color_brewer(palette = "Set1") +
@@ -187,5 +189,37 @@ PlotDiv <- function(data){
     scale_y_continuous(limits = c(0, max(data$RedFunChao)*1.1)) +
     ggtitle("Perfil q (Redundância Funcional)")
 
-  return(ggpubr::ggarrange(plotTax, plotFun, plotRedFun, ncol = 3, nrow = 1))
+  if (cap) {
+    tax_title <- readline("Digite o título para o gráfico de Diversidade Taxonômica: ")
+    tax_x_label <- readline("Digite a etiqueta para o eixo x do gráfico de Diversidade Taxonômica: ")
+    tax_y_label <- readline("Digite a etiqueta para o eixo y do gráfico de Diversidade Taxonômica: ")
+
+    fun_title <- readline("Digite o título para o gráfico de Diversidade Funcional: ")
+    fun_x_label <- readline("Digite a etiqueta para o eixo x do gráfico de Diversidade Funcional: ")
+    fun_y_label <- readline("Digite a etiqueta para o eixo y do gráfico de Diversidade Funcional: ")
+
+    red_title <- readline("Digite o título para o gráfico de Redundância Funcional: ")
+    red_x_label <- readline("Digite a etiqueta para o eixo x do gráfico de Redundância Funcional: ")
+    red_y_label <- readline("Digite a etiqueta para o eixo y do gráfico de Redundância Funcional: ")
+
+    # Alterar títulos, etiquetas de eixos x e y dos gráficos
+    plotTax <- plotTax + ggtitle(tax_title) + labs(x = tax_x_label, y = tax_y_label)
+    plotFun <- plotFun + ggtitle(fun_title) + labs(x = fun_x_label, y = fun_y_label)
+    plotRedFun <- plotRedFun + ggtitle(red_title) + labs(x = red_x_label, y = red_y_label)
+  }
+  if (tog) {
+    return(ggpubr::ggarrange(plotTax, plotFun, plotRedFun, ncol = 3, nrow = 1))
+  } else {
+    choice <- menu(c("Plot Diversidade Taxonômica", "Plot Diversidade Funcional", "Plot Redundância Funcional"), title = "Escolha um gráfico:")
+
+    if (choice == 1) {
+      return(plotTax)
+    } else if (choice == 2) {
+      return(plotFun)
+    } else if (choice == 3) {
+      return(plotRedFun)
+    } else {
+      stop("Escolha inválida.")
+    }
+  }
 }

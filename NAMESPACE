@@ -3,4 +3,4 @@
 export(Div)
 export(FDchao)
 export(FDsingle)
-export(PlotDiv)
+export(plotDiv)
