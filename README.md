@@ -16,9 +16,7 @@ The `Biodiv` is an package the extension of function [FunD] ([https://github.com
 
 The functional diversity of order q at level $\tau>0$ as the attribute diversity of order q:
 
-$$
-\begin{array}{l} {}^q F D(\Delta(\tau))=(\sum_{i=1}^8 v_i(\tau)(\frac{a_i(\tau)}{n_{+}})^q)^{1 /(1-q)}\\ =(\sum_{i=1}^S p_i(\sum_{j=1}^S[1-f(d_{i j}(\tau))] p_j)^{q-1})^{1 /(1-q)} \end{array}
-$$
+$${}^q F D(\Delta(\tau))=(\sum_{i=1}^8 v_i(\tau)(\frac{a_i(\tau)}{n_{+}})^q)^{1 /(1-q)}\\ =(\sum_{i=1}^S p_i(\sum_{j=1}^S[1-f(d_{i j}(\tau))] p_j)^{q-1})^{1 /(1-q)}$$
 
 The Level of threshold distinctiveness is:
 
