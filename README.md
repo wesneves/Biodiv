@@ -2,11 +2,25 @@
 
 # Biodiv
 
-Package for calculating Taxonomic Diversity, Functional Diversity, and Functional Redundancy
+<h5 align="right">
 
-## Introduction to Biodiv (R package): Excerpt from Biodiv User's Guide - Wesley Neves
+Latest version: 2023-08-18
 
-In this document, here provide a quick introduction demonstrating how to run the package `Biodiv` (Taxonomic Diversity, Functional Diversity and Functional Redundance). `Biodiv` has several main functions: `FDsingle`, `FDchao`, `Div` and `PlotDiv`.
+</h5>
+
+<font color="394CAE">
+
+<h3 color="394CAE" style="font-weight: bold">
+
+Introduction to Biodiv (R package): Excerpt from Biodiv User's Guide
+
+</h3>
+
+</font> <br>
+
+<h5><b> Wesley Neves</b> <br><br></h5>
+
+<br> Biodiv (Package for calculating Taxonomic Diversity, Functional Diversity, and Functional Redundancy) is an R package, avaliable in [Github](https://github.com/wesneves/Biodiv.git). In this document, here provide a quick introduction demonstrating how to run the package `Biodiv` (Taxonomic Diversity, Functional Diversity and Functional Redundance). `Biodiv` has several main functions: `FDsingle`, `FDchao`, `Div` and `PlotDiv`.
 
 The `Biodiv` is an package the extension of function [FunD] ([https://github.com/AnneChao/FunD.git)](https://github.com/AnneChao/FunD.git)) (Chao et al , 2019) `Biodiv` focuses on three measures of Hill numbers of order q: species richness (`q = 0`), Shannon diversity (`q = 1`, the exponential of Shannon entropy) and Simpson diversity (`q = 2`, the inverse of Simpson concentration) and extend Hill numbers to three dimensions under Hill-Chao family frame work (Chao et al., 2019): Taxonomic diversity (TD), Functional diversity (FD) and Functional redundance (FR).
 
@@ -52,19 +66,45 @@ install_github('wesneves/Biodiv')
 
 ### MAIN FUNCTION: FDchao(), Div(), PlotDiv()
 
-FDchao(data, distance, tau, q, boot, datatype) Functional Diversity of N sites for various values of tau and q. This function calculate Functional Diversity of N sites for various values of tau and q
+``` r
+FDchao(data, distance, tau, q, boot)
+```
 
-Div(data) Data.frame for value of diversity required to plot the results. This function prepares a "data.frame" object where it takes 5 variables, namely (qEix, TauMin, TauMed, RedFunChao, Color). These variables are required to plot the graphs (using the PlotDiv function) depicting taxonomic, functional, and functional redundancy diversity results.
+This function calculate Functional Diversity of N sites for various values of tau and q
 
-plotDiv(data, tog, cap) function to plot the value of diversity. This is a function to plot the results of the FDchao function filtered by the Div function, generating three graphs: Taxonomic Diversity, Functional Diversity, and Functional Redundancy.
+``` r
+Div(data)
+```
 
-The parameter data must necessarily be an object containing the outcome of the Div function to prepare the graph, tog is an abbreviation of the word "together" and is a logical object. If it is set to TRUE, the function will plot the three graphs together (side by side), cap is an abbreviation of the word "capitions" and is a logical object if it is set to TRUE, the function will ask you to set the labels for the graph.
+Data.frame for value of diversity required to plot the results. This function prepares a "data.frame" object where it takes 5 variables, namely (qEix, TauMin, TauMed, RedFunChao, Color). These variables are required to plot the graphs (using the PlotDiv function) depicting taxonomic, functional, and functional redundancy diversity results.
+
+``` r
+plotDiv(data, tog, cap)
+```
+
+Function to plot the value of diversity. This is a function to plot the results of the FDchao function filtered by the Div function, generating three graphs: Taxonomic Diversity, Functional Diversity, and Functional Redundancy.
+
+The parameter `data` must necessarily be an object containing the outcome of the `Div` function to prepare the graph, `tog` is an abbreviation of the word "together" and is a logical object. If it is set to `TRUE`, the function will plot the three graphs together (side by side), `cap` is an abbreviation of the word "capitions" and is a logical object if it is set to `TRUE`, the function will ask you to set the labels for the graph.
+
+## Data Format:
+
+The type of data are supported is Individual-based abundance data Input data for each assemblage/site include samples species abundances in an empirical sample of n individuals ("reference sample"). When there are N assemblages, input data consist of an S by N abundance matrix, or N lists of species abundances.
 
 ## Example:
 
 ```{r}
 abunlist <- as.list(abundm) #list abundance for species
+```
 
+```{r}
+head(abundm, 3)
+                      pv        ia        tm ga        cq
+A_brasiliensis 0.6666667 0.0000000 1.3333333  1 0.6666667
+Bledius        0.0000000 0.3333333 0.0000000  0 0.3333333
+Coelopa        0.0000000 0.0000000 0.6666667  0 0.0000000
+```
+
+```{r}
 ktab_cat <- ade4::ktab.list.df(list(trait)) #Trait is an matrix for categorical data of macrobenthic species 
 dist_cat <- ade4::dist.ktab(ktab_cat, type = "N")
 distmat <- as.matrix(dist_cat)
@@ -74,22 +114,68 @@ library(ggplot2)
 library(magrittr)
 
 FDresul <- FDchao(abunlist, distmat, seq(min(distmat[distmat>0]), max(distmat), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50)
+```
 
+```{r}
+head(FDresul$forq, 3)
+           q estimate   s.e.    LCL     UCL  tau site
+1 0.00000000  11.0000 1.3157 8.4213 13.5787 dmin   pv
+2 0.08333333   9.9450 1.0299 7.9264 11.9636 dmin   pv
+3 0.16666667   8.9997 1.0606 6.9209 11.0785 dmin   pv
+```
+
+The variable `estimate` represents the outcomes of diversity indices applied with a functional diversity weight (tau value).
+
+```{r}
 FDfilt <- Div(FDresul)
+```
 
-#Consulting the minimum and medium value of the parameter Tau.
+```{r}
+head(FDfilt, 3)
+        qEix  TauMin TauMed RedFunChao Color
+1 0.00000000 11.0000 7.5219  0.3161909    pv
+2 0.08333333  9.9450 6.9605  0.3001006    pv
+3 0.16666667  8.9997 6.4687  0.2812316    pv
+```
 
+We used the following command to obtain estimates of the minimum and average value of the parameter Tau.:
+
+Minimum Value:
+
+```{r}
 min(distmat[distmat>0]) #min value
+```
 
+Medium Value:
+
+```{r}
 abunlist %>%
     lapply(FUN = function(x) x/sum(x)) %>%
     do.call(cbind, .) %>%
     apply(1, mean) %>%
     {sum((.%*%t(.))*distmat)} #med value
+```
 
-# Example 1: Plotting the three graphs side by side with predefined axis labels, title of the graphs.
+Plotting the graphs for Functional Diversity, Taxonomic Diversity, and Functional Redundancy:
+
+Example 1: Plotting the three graphs side by side with predefined axis labels, title of the graphs:
+
+```{r}
+abundm <- read.csv("~/Documentos/Trabalhos R/Dissertation_UFPE/Dados/abundm.csv", row.names=1)
+abunlist <- as.list(abundm)
+
+trait <- read.csv("~/Documentos/Trabalhos R/Dissertation_UFPE/Dados/trait21.csv", row.names=1)
+ktab_cat <- ade4::ktab.list.df(list(trait))
+dist_cat <- ade4::dist.ktab(ktab_cat, type = "N")
+distmat <- as.matrix(dist_cat)
+library(Biodiv)
+library(ggplot2)
+FDresul <- FDchao(abunlist, distmat, seq(min(distmat[distmat>0]), max(distmat), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50)
+FDfilt <- Div(FDresul)
 plotDiv(FDfilt, tog = T, cap = F)
+```
 
+```{r}
 # Example 2: Plotting the three graphs side by side while modifying the axis labels and the title of the graphs.
 plotDiv(FDfilt, tog = T, cap = T)
 
