@@ -1,8 +1,4 @@
----
-output:
-  md_document:
-    variant: markdown_github
----
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # Biodiv
 
@@ -37,7 +33,7 @@ The function `FDchao` calculate Functional Diversity of N sites for various valu
 The function `Div` calculate Functional Redundance blending the approach from the work of Ricotta et al 2016 with that of Chao et al 2019, the functional redundancy obtained through this new approach is essentially the relative difference between the ratio of functional diversity weighted by the mean value of Tau and the biological diversity weighted by the minimum value of tau (corresponding to classic taxonomic diversity, which can be derived using conventional Hill numbers).
 
 $$
-FR=1-\frac{{}^qFD(\Delta(\tau_{med}))}{{}^qFD(\Delta(\tau_{min}))}=1-\frac{\left(\sum_{i=1}^S v_i(\tau)\left(\frac{a_i(\tau)}{n_{+}}\right)^q\right)^{1 /(1-\tau)}}{\left(\sum_{i=1}^{S} p_{i}^{q}\right)^{1/(1-q)}}
+FR=1-\frac{{}^qFD(\Delta(\tau_{med}))}{{}^qFD(\Delta(\tau_{min}))}=1-\frac{\left(\sum_{i=1}^S v_i(\tau)\left(\frac{a_i(\tau)}{n_{+}}\right)^q\right)^{1 /(1-q)}}{\left(\sum_{i=1}^{S} p_{i}^{q}\right)^{1/(1-q)}}
 $$
 
 The value of the generalized index for functional diversity, when weighted by the minimum value of the functional distance matrix, results in taxonomic diversity since all species are grouped into individual clusters, as no pair of species has a distance smaller than the smallest value in the distance matrix. Therefore, no pairwise species value is smaller than the minimum value of tau.
@@ -52,9 +48,6 @@ The result is saved in a data.frame object necessary for plotting graphs of taxo
 install.packages('devtools')
 library(devtools)
 install_github('wesneves/Biodiv')
-
-## import packages
-library(ggplot2)
 ```
 
 ### MAIN FUNCTION: FDchao(), Div(), PlotDiv()
@@ -79,9 +72,13 @@ distmat <- as.matrix(dist_cat)
 library(Biodiv)
 library(ggplot2)
 library(magrittr)
+
 FDresul <- FDchao(abunlist, distmat, seq(min(distmat[distmat>0]), max(distmat), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50)
+
 FDfilt <- Div(FDresul)
+
 #Consulting the minimum and medium value of the parameter Tau.
+
 min(distmat[distmat>0]) #min value
 
 abunlist %>%
