@@ -46,7 +46,7 @@ The result is saved in a data.frame object necessary for plotting graphs of taxo
 
 ## Install Biodiv in R
 
-```{r install, eval=FALSE}
+```{r}
 
 ## install the latest version from github
 install.packages('devtools')
