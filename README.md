@@ -4,19 +4,6 @@ output:
     variant: markdown_github
 ---
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "",
-  fig.path = "README/README-",
-  fig.align = 'center',
-  fig.retina=2, fig.width = 7, fig.height = 5,
-  warning = FALSE,
-  message = FALSE
-)
-options("width"=200)
-```
-
 # Biodiv
 
 Package for calculating Taxonomic Diversity, Functional Diversity, and Functional Redundancy
