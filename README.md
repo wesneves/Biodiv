@@ -98,6 +98,10 @@ The type of data are supported is Individual-based abundance data Input data for
 
 ## Example:
 
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
 ```{r}
 abunlist <- as.list(abundm) #list abundance for species
 ```
