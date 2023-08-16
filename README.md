@@ -63,23 +63,42 @@ FDchao(data, distance, tau, q, boot, datatype) Functional Diversity of N sites f
 
 Div(data) Data.frame for value of diversity required to plot the results. This function prepares a "data.frame" object where it takes 5 variables, namely (qEix, TauMin, TauMed, RedFunChao, Color). These variables are required to plot the graphs (using the PlotDiv function) depicting taxonomic, functional, and functional redundancy diversity results.
 
-PlotDiv(data) function to plot the value of diversity. This is a function to plot the results of the FDchao function filtered by the Div function, generating three graphs: Taxonomic Diversity, Functional Diversity, and Functional Redundancy.
+plotDiv(data, tog, cap) function to plot the value of diversity. This is a function to plot the results of the FDchao function filtered by the Div function, generating three graphs: Taxonomic Diversity, Functional Diversity, and Functional Redundancy.
+
+The parameter data must necessarily be an object containing the outcome of the Div function to prepare the graph, tog is an abbreviation of the word "together" and is a logical object. If it is set to TRUE, the function will plot the three graphs together (side by side), cap is an abbreviation of the word "capitions" and is a logical object if it is set to TRUE, the function will ask you to set the labels for the graph.
 
 ## Example:
 
 ```{r}
-abundm <- read.csv("~/Documentos/Trabalhos R/Dissertation_UFPE/Dados/abundm.csv", row.names=1)
-abunlist <- as.list(abundm)
+abunlist <- as.list(abundm) #list abundance for species
 
-trait <- read.csv("~/Documentos/Trabalhos R/Dissertation_UFPE/Dados/trait21.csv", row.names=1)
-ktab_cat <- ade4::ktab.list.df(list(trait))
+ktab_cat <- ade4::ktab.list.df(list(trait)) #Trait is an matrix for categorical data of macrobenthic species 
 dist_cat <- ade4::dist.ktab(ktab_cat, type = "N")
 distmat <- as.matrix(dist_cat)
 
-FDresul <- FDchao(abunlist, distmat, seq(min(distmat[distmat>0]), max(distmat), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50)
-
-FDfilt <- Div(FDresul)
-
+library(Biodiv)
 library(ggplot2)
-PlotDiv(FDfilt)
+library(magrittr)
+FDresul <- FDchao(abunlist, distmat, seq(min(distmat[distmat>0]), max(distmat), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50)
+FDfilt <- Div(FDresul)
+#Consulting the minimum and medium value of the parameter Tau.
+min(distmat[distmat>0]) #min value
+
+abunlist %>%
+    lapply(FUN = function(x) x/sum(x)) %>%
+    do.call(cbind, .) %>%
+    apply(1, mean) %>%
+    {sum((.%*%t(.))*distmat)} #med value
+
+# Example 1: Plotting the three graphs side by side with predefined axis labels, title of the graphs.
+plotDiv(FDfilt, tog = T, cap = F)
+
+# Example 2: Plotting the three graphs side by side while modifying the axis labels and the title of the graphs.
+plotDiv(FDfilt, tog = T, cap = T)
+
+# Example 3: Plotting one graph with predefined axis labels, title of the graph
+plotDiv(FDfilt, tog = F, cap = F)
+
+# Example 4: Plotting one graph while modifyinh the axis labels and the title of the graphs.
+plotDiv(FDfilt, tog = F, cap = T)
 ```
