@@ -98,100 +98,29 @@ The type of data are supported is Individual-based abundance data Input data for
 
 ## Example:
 
+The abundance data is from saproxylic beetles collected over two years from trees in a mountainous forest ecosystem (analyzed and discussed in Thorn et al. 2016). The design consists of 12 plots, each composed of three experimentally felled trees. In each plot, the bark of one tree was completely removed, the bark of a second tree was partially removed and the third tree served as a control. A total of 120 species of saproxylic beetles were captured with emergence traps on felled trees.
+
+All species were characterized for a set of 10 functional traits, five of them continuous: body size, mean elevation above sea level, mean wood diameter, decay stage of dead wood, and canopy cover of forests in which a species occurs. Categorical traits included three binary traits flower visiting, coniferous host trees, and broad-leaved host trees, and two traits with three categories each microhabitat guild of larvae, and feeding type. Species-by-species distances were computed by means of a Gower-distance with equal weighting on each trait except for the two binary host tree traits.
+
+There’ll be no need to use data(). The data isn’t actually loaded into R until you use it (that’s what “lazy load” means).
+
+- Real Example: Beetle data,analysed and discussed in Thorn et al. 2016 and Chao et al. 2019
+
 ```{r pressure, echo=FALSE}
-plot(pressure)
-```
+BiolDiv <- FDchao(Babund, Bdist, seq(min(Bdist[Bdist>0]), max(Bdist), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50) #help("FDchao"), help("Babund"), help("Bdist") for more details.
 
-```{r}
-abunlist <- as.list(abundm) #list abundance for species
-```
+FiltBD <- Div(BiolDiv) #help("Div") for more details.
 
-```{r}
-head(abundm, 3)
-                      pv        ia        tm ga        cq
-A_brasiliensis 0.6666667 0.0000000 1.3333333  1 0.6666667
-Bledius        0.0000000 0.3333333 0.0000000  0 0.3333333
-Coelopa        0.0000000 0.0000000 0.6666667  0 0.0000000
-```
-
-```{r}
-ktab_cat <- ade4::ktab.list.df(list(trait)) #Trait is an matrix for categorical data of macrobenthic species 
-dist_cat <- ade4::dist.ktab(ktab_cat, type = "N")
-distmat <- as.matrix(dist_cat)
-
-library(Biodiv)
-library(ggplot2)
-library(magrittr)
-
-FDresul <- FDchao(abunlist, distmat, seq(min(distmat[distmat>0]), max(distmat), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50)
-```
-
-```{r}
-head(FDresul$forq, 3)
-           q estimate   s.e.    LCL     UCL  tau site
-1 0.00000000  11.0000 1.3157 8.4213 13.5787 dmin   pv
-2 0.08333333   9.9450 1.0299 7.9264 11.9636 dmin   pv
-3 0.16666667   8.9997 1.0606 6.9209 11.0785 dmin   pv
-```
-
-The variable `estimate` represents the outcomes of diversity indices applied with a functional diversity weight (tau value).
-
-```{r}
-FDfilt <- Div(FDresul)
-```
-
-```{r}
-head(FDfilt, 3)
-        qEix  TauMin TauMed RedFunChao Color
-1 0.00000000 11.0000 7.5219  0.3161909    pv
-2 0.08333333  9.9450 6.9605  0.3001006    pv
-3 0.16666667  8.9997 6.4687  0.2812316    pv
-```
-
-We used the following command to obtain estimates of the minimum and average value of the parameter Tau.:
-
-Minimum Value:
-
-```{r}
-min(distmat[distmat>0]) #min value
-```
-
-Medium Value:
-
-```{r}
-abunlist %>%
-    lapply(FUN = function(x) x/sum(x)) %>%
-    do.call(cbind, .) %>%
-    apply(1, mean) %>%
-    {sum((.%*%t(.))*distmat)} #med value
-```
-
-Plotting the graphs for Functional Diversity, Taxonomic Diversity, and Functional Redundancy:
-
-Example 1: Plotting the three graphs side by side with predefined axis labels, title of the graphs:
-
-```{r}
-abundm <- read.csv("~/Documentos/Trabalhos R/Dissertation_UFPE/Dados/abundm.csv", row.names=1)
-abunlist <- as.list(abundm)
-
-trait <- read.csv("~/Documentos/Trabalhos R/Dissertation_UFPE/Dados/trait21.csv", row.names=1)
-ktab_cat <- ade4::ktab.list.df(list(trait))
-dist_cat <- ade4::dist.ktab(ktab_cat, type = "N")
-distmat <- as.matrix(dist_cat)
-library(Biodiv)
-library(ggplot2)
-FDresul <- FDchao(abunlist, distmat, seq(min(distmat[distmat>0]), max(distmat), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50)
-FDfilt <- Div(FDresul)
-plotDiv(FDfilt, tog = T, cap = F)
+plotDiv(FiltBD) #help("plotDiv") for more details.
 ```
 
 ```{r}
 # Example 2: Plotting the three graphs side by side while modifying the axis labels and the title of the graphs.
-plotDiv(FDfilt, tog = T, cap = T)
+plotDiv(FiltBD, tog = T, cap = T)
 
 # Example 3: Plotting one graph with predefined axis labels, title of the graph
-plotDiv(FDfilt, tog = F, cap = F)
+plotDiv(FiltBD, tog = F, cap = F)
 
 # Example 4: Plotting one graph while modifyinh the axis labels and the title of the graphs.
-plotDiv(FDfilt, tog = F, cap = T)
+plotDiv(FiltBD, tog = F, cap = T)
 ```
