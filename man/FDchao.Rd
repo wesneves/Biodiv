@@ -22,5 +22,19 @@ two matrices of FD; the first matrix is the q-profile information, the second ma
 }
 \description{
 This function calculate Functional Diversity of N sites
-for various values of tau and q
+for various values of tau and q. For more details on the values of each parameter, refer to the examples of the Div function.
+}
+\examples{
+#minimum tau
+min(Bdist[Bdist>0])
+#maximum tau
+max(Bdist)
+#mean tau
+library(magrittr)
+Babund \%>\%
+lapply(FUN = function(x) x/sum(x)) \%>\%
+ do.call(cbind, .) \%>\%
+ apply(1, mean) \%>\%
+ {sum((.\%*\%t(.))*Bdist)}
+data <- FDchao(Babund, Bdist, seq(min(Bdist[Bdist>0]), max(Bdist), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50)
 }

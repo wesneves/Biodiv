@@ -2,7 +2,7 @@
 % Please edit documentation in R/Biodiv_functions.R
 \name{plotDiv}
 \alias{plotDiv}
-\title{plotDiv(data, tog, cap) function to plot the value of diversity}
+\title{plotDiv(data, tog, cap) Function to plot the value of diversity}
 \usage{
 plotDiv(data, tog = TRUE, cap = FALSE)
 }
@@ -20,4 +20,10 @@ Three graphs, namely (functional diversity, taxonomic diversity, and functional 
 This is a function to plot the results of the FDchao function
 filtered by the Div function, generating three graphs:
 Taxonomic Diversity, Functional Diversity, and Functional Redundancy.
+}
+\examples{
+# example code. help("plotDiv") for more details.
+plotDiv(datafilt) #To use the plot, it is necessary to fulfill two prerequisites: the first one is to create an object using the initial function FDchao, the second one is to create an object with the function's argument Div being the result of step 1. After that, you can proceed to the final step, which is the plot of the graph plotDiv"
+plotDiv(FiltBD, tog = TRUE, cap = TRUE) #set the labels for the graph
+plotDiv(FiltBD, tog = FALSE, cap = FALSE) #Choose a plot to create
 }

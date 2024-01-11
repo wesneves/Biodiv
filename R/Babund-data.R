@@ -1,0 +1,11 @@
+#' @title Babund - Beetle Data in a Mountain Forest Ecosystem
+#' @description The abundance data is from saproxylic beetles collected over two years from trees in a mountainous forest ecosystem (analyzed and discussed in Thorn et al. 2016). The design consists of 12 plots, each composed of three experimentally felled trees. In each plot, the bark of one tree was completely removed, the bark of a second tree was partially removed and the third tree served as a control. A total of 120 species of saproxylic beetles were captured with emergence traps on felled trees.
+#' @format An object of class `"data.frame"` with 120 rows and 3 variables:
+#' \describe{
+#'   \item{\code{control}}{integer COLUMN_DESCRIPTION}
+#'   \item{\code{debarked}}{integer COLUMN_DESCRIPTION}
+#'   \item{\code{scratched}}{integer COLUMN_DESCRIPTION}
+#'}
+#' @usage there’ll be no need to use data(). The data isn’t actually loaded into R until you use it (that’s what “lazy load” means).
+#' @references Thorn, S., Bässler, C., Bußler, H., Lindenmayer, D.B., Schmidt, S., Seibold, S., Wende, B. and Müller, J., 2016. Bark-scratching of storm-felled trees preserves biodiversity at lower economic costs compared to debarking. Forest Ecology and Management, 364, pp.10-16.
+"Babund"

@@ -27,14 +27,33 @@ FDsingle <- function(data, distance, tau, q){
 #' FDchao(data, distance, tau, q, boot) Functional Diversity of N sites for various values of tau and q
 #'
 #' This function calculate Functional Diversity of N sites
-#' for various values of tau and q
+#' for various values of tau and q. For more details on the values of each parameter, refer to the examples of the Div function.
 #'
 #' @param data a list with N sites; each element of list is species abundances.
 #' @param distance a matrix of species-pairwise distances.
 #' @param tau a numeric or a vector of levels of threshold distinctiveness.
 #' @param q a numeric or a vector of diversity orders; the suggested range for q is [0, 2].
 #' @param boot a numeric of number of bootstrap replications.
+#' @import ggplot2
+#' @importFrom stats rmultinom
+#' @importFrom stats rbinom
+#' @importFrom stats qnorm
+#' @importFrom stats sd
+#' @importFrom utils menu
 #' @return two matrices of FD; the first matrix is the q-profile information, the second matrix is the tau profile information.
+#' @examples
+#' #minimum tau
+#' min(Bdist[Bdist>0])
+#' #maximum tau
+#' max(Bdist)
+#' #mean tau
+#' library(magrittr)
+#' Babund %>%
+#'lapply(FUN = function(x) x/sum(x)) %>%
+#'  do.call(cbind, .) %>%
+#'  apply(1, mean) %>%
+#'  {sum((.%*%t(.))*Bdist)}
+#' data <- FDchao(Babund, Bdist, seq(min(Bdist[Bdist>0]), max(Bdist), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50)
 #' @export
 FDchao <- function(data, distance, tau, q, boot){
   EstiBootComm.Func = function(data, distance){n = sum(data)
@@ -142,6 +161,16 @@ FDchao <- function(data, distance, tau, q, boot){
 #'
 #' @param data This parameter must necessarily be an object containing the outcome of the FDchao function; the div function will filter these outcomes to prepare the graph.
 #' @return data.frame for value of taxonomic diversity, functional diversity and functional redundance.
+#' @examples
+#' # example code
+#' datafilt <- Div(data) #help("Div") for more details.
+#' #Value q0 Control
+#' subset(datafilt, qEix == 0.00000000 & Color == "control")
+#' #Value q0 Debarked
+#' subset(datafilt, qEix == 0.00000000 & Color == "debarked")
+#' #Value q0 Scratched
+#' subset(datafilt, qEix == 2.00000000 & Color == "scratched")
+#'
 #' @export
 Div <- function(data) {
   data_plot <- data.frame(
@@ -154,7 +183,7 @@ Div <- function(data) {
   return(data_plot)
 }
 
-#' plotDiv(data, tog, cap) function to plot the value of diversity
+#' plotDiv(data, tog, cap) Function to plot the value of diversity
 #'
 #' This is a function to plot the results of the FDchao function
 #' filtered by the Div function, generating three graphs:
@@ -163,6 +192,11 @@ Div <- function(data) {
 #' @param tog This parameter is an abbreviation of the word "together" and is a logical object. If it is set to TRUE, the function will plot the three graphs together (side by side).
 #' @param cap This parameter is an abbreviation of the word "captions" and is a logical object. If it is set to TRUE, the function will ask you to set the labels for the graph.
 #' @return Three graphs, namely (functional diversity, taxonomic diversity, and functional redundancy).
+#' @examples
+#' # example code. help("plotDiv") for more details.
+#' plotDiv(datafilt) #To use the plot, it is necessary to fulfill two prerequisites: the first one is to create an object using the initial function FDchao, the second one is to create an object with the function's argument Div being the result of step 1. After that, you can proceed to the final step, which is the plot of the graph plotDiv"
+#' plotDiv(FiltBD, tog = TRUE, cap = TRUE) #set the labels for the graph
+#' plotDiv(FiltBD, tog = FALSE, cap = FALSE) #Choose a plot to create
 #' @export
 plotDiv <- function(data, tog = TRUE,  cap = FALSE){
   plotTax <- ggplot(data)+

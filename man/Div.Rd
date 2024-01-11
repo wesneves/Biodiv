@@ -18,3 +18,14 @@ This function prepares a "data.frame" object where it takes 5 variables, namely
 These variables are required to plot the graphs (using the PlotDiv function)
 depicting taxonomic, functional, and functional redundancy diversity results.
 }
+\examples{
+# example code
+datafilt <- Div(data) #help("Div") for more details.
+#Value q0 Control
+subset(datafilt, qEix == 0.00000000 & Color == "control")
+#Value q0 Debarked
+subset(datafilt, qEix == 0.00000000 & Color == "debarked")
+#Value q0 Scratched
+subset(datafilt, qEix == 2.00000000 & Color == "scratched")
+
+}

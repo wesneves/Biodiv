@@ -34,9 +34,6 @@ The function `Div` calculate Functional Redundance blending the approach from th
 
 ## HOW TO RUN Biodiv:
 ```{r eval=FALSE}
-## install Biodiv package from CRAN
-# install.packages("Biodiv")  # coming soon
-
 ## install the latest version from github
 install.packages('devtools')
 library(devtools)
@@ -47,21 +44,45 @@ library(ggplot2)
 ```
 
 ## MAIN FUNCTION: FDchao()
-First describe the main function `iNEXT3D()` with default arguments: 
+Functional Diversity of N sites for various values of tau and q
+Arguments: FDchao(data, distance, tau, q, boot)
+- data a list with N sites; each element of list is species abundances.
+- distance a matrix of species-pairwise distances.
+- tau a numeric or a vector of levels of threshold distinctiveness.
+- q a numeric or a vector of diversity orders; the suggested range for q is [0, 2].
+- boot a numeric of number of bootstrap replications.
 
-```{r eval=FALSE}
-FDchao <- function(data, distance, tau, q, boot)
-```
+##MAIN FUNCTION: Div()
+Data.frame for value of diversity required to plot the results
+Arguments: Div(data)
+- data This parameter must necessarily be an object containing the outcome of the FDchao function; the div function will filter these outcomes to prepare the graph.
 
-The arguments of this function are briefly described below, and will be explained in more details by illustrative examples in later text. This main function computes diversity estimates of order q, and weighted by Tau value.
+## MAIN FUNCTION: plotDiv()
+Function to plot the value of diversity
+Arguments: plotDiv(data, tog, cap)
+- data This parameter must necessarily be an object containing the outcome of the Div function to prepare the graph.
+- tog This parameter is an abbreviation of the word "together" and is a logical object. If it is set to TRUE, the function will plot the three graphs together (side by side).
+- cap This parameter is an abbreviation of the word "captions" and is a logical object. If it is set to TRUE, the function will ask you to set the labels for the graph.
 
 ## DATA FORMAT
-Individual-based abundance data: Input data for each assemblage/site include samples species abundances in an empirical sample of n individuals (“reference sample”). When there are N assemblages, input data consist of an S by N abundance matrix, or N lists of species abundances.  
+Individual-based abundance data: Input data for each assemblage/site include samples species abundances in an empirical sample of n individuals (“reference sample”). When there are N assemblages, input data consist of an S by N abundance matrix, or N lists of species abundances.
 
+## EXAMPLES
 
+The abundance data is from saproxylic beetles collected over two years from trees in a mountainous forest ecosystem (analyzed and discussed in Thorn et al. 2016). The design consists of 12 plots, each composed of three experimentally felled trees. In each plot, the bark of one tree was completely removed, the bark of a second tree was partially removed and the third tree served as a control. A total of 120 species of saproxylic beetles were captured with emergence traps on felled trees.
 
+All species were characterized for a set of 10 functional traits, five of them continuous: body size, mean elevation above sea level, mean wood diameter, decay stage of dead wood, and canopy cover of forests in which a species occurs. Categorical traits included three binary traits flower visiting, coniferous host trees, and broad-leaved host trees, and two traits with three categories each microhabitat guild of larvae, and feeding type. Species-by-species distances were computed by means of a Gower-distance with equal weighting on each trait except for the two binary host tree traits.
 
+There’ll be no need to use data(). The data isn’t actually loaded into R until you use it (that’s what “lazy load” means).
 
+- Real Example: Beetle data,analysed and discussed in Thorn et al. 2016 and Chao et al. 2019
+
+```{r eval=FALSE}
+BiolDiv <- FDchao(Babund, Bdist, seq(min(Bdist[Bdist>0]), max(Bdist), length.out = 25), seq(from = 0, to = 2, length.out = 25), 50) #help("FDchao"), help("Babund"), help("Bdist") for more details.
+FiltBD <- Div(BiolDiv) #help("Div") for more details.
+
+plotDiv(FiltBD) #help("plotDiv") for more details.
+```
 
 ## References
 - Chao, A., Chiu, C.-H., & Jost, L. (2014). Unifying species diversity, phylogenetic diversity, functional diversity, and related similarity and differentiation measures through Hill numbers. Annual Review of Ecology, Evolution, and Systematics, 45, 297–324. 
@@ -75,6 +96,8 @@ Individual-based abundance data: Input data for each assemblage/site include sam
 - Leinster, T., & Cobbold, C. A. (2012). Measuring diversity: The importance of species similarity. Ecology, 93(3), 477–489. 
 
 - Ricotta, C., de Bello, F., Moretti, M., Caccianiga, M., Cerabolini, B. E. L., & Pavoine, S. (2016). Measuring the functional redundancy of biological communities: A quantitative guide. Methods in Ecology and Evolution, 7, 1386–1395. 
+
+- Thorn, S., Bässler, C., Bußler, H., Lindenmayer, D.B., Schmidt, S., Seibold, S., Wende, B. and Müller, J., (2016). Bark-scratching of storm-felled trees preserves biodiversity at lower economic costs compared to debarking. Forest Ecology and Management, 364, pp.10-16.
 
 
 
