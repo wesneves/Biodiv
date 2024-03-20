@@ -3,13 +3,13 @@ type: Package
 Title: Taxonomic Diversity, Functional Diversity, and Functional Redundancy
 Version: 1.0.1
 Authors@R: 
-    person("Wesley", "Neves", , "wesley.neves@ufpe.br, role = c("aut", "cre"),
+    person("Wesley", "Neves", , "wesley.neves@ufpe.br", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0006-6772-9025"))
 Description: Package designed to quantify the functional and taxonomic diversity of natural communities following Anne Chao's approach as outlined in her 2019 article titled "An attribute-diversity approach to functional diversity, functional beta diversity, and related (dis)similarity measures." Additionally, I introduce a function for computing Functional Redundancy, leveraging the desirable mathematical properties of Chao's taxonomic and functional diversity metrics to calculate the functional redundancy within communities.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.2.3
 Imports:
     ggplot2
 Suggests: 
