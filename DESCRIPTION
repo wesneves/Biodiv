@@ -9,7 +9,7 @@ Description: Package designed to quantify the functional and taxonomic diversity
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Imports:
     ggplot2
 Suggests: 
