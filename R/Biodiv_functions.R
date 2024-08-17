@@ -1,6 +1,6 @@
 #' Biodiv (Package for calculating Taxonomic Diversity, Functional Diversity, and Functional Redundancy)
 #'
-#' The Biodiv is an package the extension of function [FunD] (https://github.com/AnneChao/FunD.git)) (Chao et al , 2019)
+#' The Biodiv is an package the extension of function [FunD] (https://github.com/AnneChao/FunD.git) (Chao et al , 2019)
 #' Biodiv focuses on three measures of Hill numbers of order q: species richness (q = 0), Shannon diversity (q = 1, the exponential of Shannon entropy)
 #' and Simpson diversity (q = 2, the inverse of Simpson concentration) and extend Hill numbers to three dimensions under Hill-Chao family frame work (Chao et al., 2019)
 #' Taxonomic diversity (TD), Functional diversity (FD) and Functional redundance (FR).
@@ -15,11 +15,11 @@
 #' weighted by the mean value of Tau and the biological diversity weighted by the minimum value of tau
 #' (corresponding to classic taxonomic diversity, which can be derived using conventional Hill numbers).
 #'
-#' The function plotDiv Function to plot the value of diversity. This is a function to plot the results
-#' of the FDchao function filtered by the Div function, generating three graphs:
+#' The function plotDiv plot the value of diversity. This is a function to plot the results
+#' of the FDchao() filtered by the Div(), generating three graphs:
 #' Taxonomic Diversity, Functional Diversity, and Functional Redundancy.
 #'
-#' See more details: ?FDsingle, ?FDchao, ?Div, ?plotDiv and consult https://github.com/wesneves/Biodiv
+#' See more details: ?FDsingle, ?FDchao, ?Div, ?plotDiv and consult the [link] (https://github.com/wesneves/Biodiv)
 #'
 #' @name Biodiv
 "_PACKAGE"
@@ -229,25 +229,25 @@ plotDiv <- function(data, tog = TRUE,  cap = FALSE){
     geom_line(aes(x=qEix, y = TauMin, color = Color, linetype = Color), linewidth = 1.2)+
     scale_color_brewer(palette = "Set1") +
     theme(panel.border = element_rect(colour = "black",fill = NA,size = .5), legend.position = "bottom", plot.title = element_text(hjust = 0.5, size = 12, face = "plain"), axis.text.x = element_text(colour = "black", size = 10), axis.text.y = element_text(colour = "black", size = 10), legend.key = element_rect(fill = "white", colour = "white"), legend.title = element_blank(), panel.grid.major = element_line(colour = "#d3d3d3"), panel.grid.minor = element_blank(), panel.background = element_blank(), text = element_text())+
-    labs(x="Ordem q", y="Diversidade Taxonômica") +
+    labs(x="q Order", y="Taxonomic Diversity") +
     scale_y_continuous(limits = c(0, ceiling(max(data$TauMin)))) +
-    ggtitle("Perfil q (tau = Mínimo)")
+    ggtitle("q Profile (tau = Minimum)")
 
   plotFun <- ggplot(data)+
     geom_line(aes(x=qEix, y = TauMed, color = Color, linetype = Color), linewidth = 1.2)+
     scale_color_brewer(palette = "Set1") +
     theme(panel.border = element_rect(colour = "black",fill = NA,size = .5), legend.position = "bottom", plot.title = element_text(hjust = 0.5, size = 12, face = "plain"), axis.text.x = element_text(colour = "black", size = 10), axis.text.y = element_text(colour = "black", size = 10), legend.key = element_rect(fill = "white", colour = "white"), legend.title = element_blank(), panel.grid.major = element_line(colour = "#d3d3d3"), panel.grid.minor = element_blank(), panel.background = element_blank(), text = element_text())+
-    labs(x="Ordem q", y="Diversidade Funcional") +
+    labs(x="q Order", y="Functional Diversity") +
     scale_y_continuous(limits = c(0, ceiling(max(data$TauMed)))) +
-    ggtitle("Perfil q (tau = Médio)")
+    ggtitle("q Profile (tau = Average)")
 
   plotRedFun <- ggplot(data)+
     geom_line(aes(x = qEix, y = RedFunChao, color = Color, linetype = Color), linewidth=1.2)+
     scale_color_brewer(palette = "Set1") +
     theme(panel.border = element_rect(colour = "black",fill = NA,size = .5), legend.position = "bottom", plot.title = element_text(hjust = 0.5, size = 12, face = "plain"), axis.text.x = element_text(colour = "black", size = 10), axis.text.y = element_text(colour = "black", size = 10), legend.key = element_rect(fill = "white", colour = "white"), legend.title = element_blank(), panel.grid.major = element_line(colour = "#d3d3d3"), panel.grid.minor = element_blank(), panel.background = element_blank(), text = element_text())+
-    labs(x="Ordem q", y="Redundância Funcional") +
+    labs(x="q Order", y="Functional Redundancy") +
     scale_y_continuous(limits = c(0, max(data$RedFunChao)*1.1)) +
-    ggtitle("Perfil q (Redundância Funcional)")
+    ggtitle("q Profile (Functional Redundancy)")
 
   if (cap) {
     tax_title <- readline("Enter the title for the Taxonomic Diversity plot: ")

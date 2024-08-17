@@ -6,7 +6,7 @@
 \alias{Biodiv}
 \title{Biodiv (Package for calculating Taxonomic Diversity, Functional Diversity, and Functional Redundancy)}
 \description{
-The Biodiv is an package the extension of function \link{FunD} (https://github.com/AnneChao/FunD.git)) (Chao et al , 2019)
+The Biodiv is an package the extension of function \link{FunD} (https://github.com/AnneChao/FunD.git) (Chao et al , 2019)
 Biodiv focuses on three measures of Hill numbers of order q: species richness (q = 0), Shannon diversity (q = 1, the exponential of Shannon entropy)
 and Simpson diversity (q = 2, the inverse of Simpson concentration) and extend Hill numbers to three dimensions under Hill-Chao family frame work (Chao et al., 2019)
 Taxonomic diversity (TD), Functional diversity (FD) and Functional redundance (FR).
@@ -22,11 +22,11 @@ through this new approach is essentially the relative difference between the rat
 weighted by the mean value of Tau and the biological diversity weighted by the minimum value of tau
 (corresponding to classic taxonomic diversity, which can be derived using conventional Hill numbers).
 
-The function plotDiv Function to plot the value of diversity. This is a function to plot the results
-of the FDchao function filtered by the Div function, generating three graphs:
+The function plotDiv plot the value of diversity. This is a function to plot the results
+of the FDchao() filtered by the Div(), generating three graphs:
 Taxonomic Diversity, Functional Diversity, and Functional Redundancy.
 
-See more details: ?FDsingle, ?FDchao, ?Div, ?plotDiv and consult https://github.com/wesneves/Biodiv
+See more details: ?FDsingle, ?FDchao, ?Div, ?plotDiv and consult the \link{link} (https://github.com/wesneves/Biodiv)
 }
 \author{
 \strong{Maintainer}: Wesley Neves \email{wesley.neves@ufpe.br} (\href{https://orcid.org/0009-0006-6772-9025}{ORCID})
