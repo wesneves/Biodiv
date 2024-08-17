@@ -1,3 +1,29 @@
+#' Biodiv (Package for calculating Taxonomic Diversity, Functional Diversity, and Functional Redundancy)
+#'
+#' The Biodiv is an package the extension of function [FunD] (https://github.com/AnneChao/FunD.git)) (Chao et al , 2019)
+#' Biodiv focuses on three measures of Hill numbers of order q: species richness (q = 0), Shannon diversity (q = 1, the exponential of Shannon entropy)
+#' and Simpson diversity (q = 2, the inverse of Simpson concentration) and extend Hill numbers to three dimensions under Hill-Chao family frame work (Chao et al., 2019)
+#' Taxonomic diversity (TD), Functional diversity (FD) and Functional redundance (FR).
+#'
+#' Biodiv has several main functions: FDsingle, FDchao, Div and plotDiv.
+#'
+#' The function FDchao calculate Functional Diversity of N sites for various values of tau and q.
+#'
+#' The function Div calculate Functional Redundance blending the approach from the work of
+#' Ricotta et al 2016 with that of Chao et al 2019, the functional redundancy obtained
+#' through this new approach is essentially the relative difference between the ratio of functional diversity
+#' weighted by the mean value of Tau and the biological diversity weighted by the minimum value of tau
+#' (corresponding to classic taxonomic diversity, which can be derived using conventional Hill numbers).
+#'
+#' The function plotDiv Function to plot the value of diversity. This is a function to plot the results
+#' of the FDchao function filtered by the Div function, generating three graphs:
+#' Taxonomic Diversity, Functional Diversity, and Functional Redundancy.
+#'
+#' See more details: ?FDsingle, ?FDchao, ?Div, ?plotDiv and consult https://github.com/wesneves/Biodiv
+#'
+#' @name Biodiv
+"_PACKAGE"
+
 #' FDsingle(data, distance, tau, q) Functional Diversity of a single site for specified values of tau and q of Hill
 #'
 #' This function calculates functional diversity for a single sample
