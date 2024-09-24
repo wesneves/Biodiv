@@ -26,7 +26,7 @@ Introduction to Biodiv (R package): Excerpt from Biodiv User's Guide
 
 <h5><b> Wesley Neves</b> <br><br></h5>
 
-<br> Biodiv (Package for calculating Taxonomic Diversity, Functional Diversity, and Functional Redundancy) is an R package, avaliable in [Github](https://github.com/wesneves/Biodiv.git). In this document, here provide a quick introduction demonstrating how to run the package `Biodiv` (Taxonomic Diversity, Functional Diversity and Functional Redundance). `Biodiv` has several main functions: `FDsingle`, `FDchao`, `Div` and `PlotDiv`.
+<br> Biodiv (Package for calculating Taxonomic Diversity, Functional Diversity, and Functional Redundancy) is an R package, avaliable in [Github](https://github.com/wesneves/Biodiv.git). In this document, here provide a quick introduction demonstrating how to run the package `Biodiv` (Taxonomic Diversity, Functional Diversity and Functional Redundance). `Biodiv` has several main functions: `FDsingle`, `FDchao`, `Div` and `plotDiv`.
 
 The `Biodiv` is an package the extension of function [FunD] ([https://github.com/AnneChao/FunD.git)](https://github.com/AnneChao/FunD.git)) (Chao et al , 2019) `Biodiv` focuses on three measures of Hill numbers of order q: species richness (`q = 0`), Shannon diversity (`q = 1`, the exponential of Shannon entropy) and Simpson diversity (`q = 2`, the inverse of Simpson concentration) and extend Hill numbers to three dimensions under Hill-Chao family frame work (Chao et al., 2019): Taxonomic diversity (TD), Functional diversity (FD) and Functional redundance (FR).
 
@@ -70,7 +70,7 @@ library(devtools)
 install_github('wesneves/Biodiv')
 ```
 
-### MAIN FUNCTION: FDchao(), Div(), PlotDiv()
+### MAIN FUNCTION: FDchao(), Div(), plotDiv()
 
 ``` r
 FDchao(data, distance, tau, q, boot)
@@ -82,7 +82,7 @@ This function calculate Functional Diversity of N sites for various values of ta
 Div(data)
 ```
 
-Data.frame for value of diversity required to plot the results. This function prepares a "data.frame" object where it takes 5 variables, namely (qEix, TauMin, TauMed, RedFunChao, Color). These variables are required to plot the graphs (using the PlotDiv function) depicting taxonomic, functional, and functional redundancy diversity results.
+Data.frame for value of diversity required to plot the results. This function prepares a "data.frame" object where it takes 5 variables, namely (qEix, TauMin, TauMed, RedFunChao, Color). These variables are required to plot the graphs (using the plotDiv function) depicting taxonomic, functional, and functional redundancy diversity results.
 
 ``` r
 plotDiv(data, tog, cap)
